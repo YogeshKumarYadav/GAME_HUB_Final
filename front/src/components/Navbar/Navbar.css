@@ -1,0 +1,28 @@
+.navbardiv {
+    padding: 10px 10px 0 10px;
+    background-color: rgb(169, 230, 192);
+    margin: 0 auto;
+    height: 50px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 12px 12px 2px rgba(0, 0, 0, 0.2);
+}
+  
+.logodiv {
+    display: inline;
+    background-color: rgb(192, 167, 167);
+    width: 60px;
+    margin-right: auto;
+}
+  
+.buttdiv {
+    background-color: rgb(130, 187, 240);
+    display: inline;
+    width: 300px;
+    margin-left: 600px;
+}
+  
+.navbutton {
+    background: none;
+    border: none  ;
+}
