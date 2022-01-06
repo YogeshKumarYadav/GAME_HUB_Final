@@ -3,7 +3,11 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const UserProfileSchema = new mongoose.Schema({
-    username: {
+    name: {
+        type: String,
+        required: true
+    },
+    userid: {
         type: String,
         require: true
     },
@@ -12,6 +16,10 @@ const UserProfileSchema = new mongoose.Schema({
         require: true
     },
     gender: {
+        type: String,
+        require: true
+    },
+    email: {
         type: String,
         require: true
     },
@@ -29,16 +37,16 @@ const UserProfileSchema = new mongoose.Schema({
     ]
 });
 
-UserProfileSchema.pre('save', async function (next) {
-    try {
-        // const salt = await bcrypt.genSalt(10);
-        this.password = await bcrypt.hash(this.password, 10);
-        next();
-    }
-    catch(err) {
-        next(err);
-    }
-});
+// UserProfileSchema.pre('save', async function (next) {
+//     try {
+//         // const salt = await bcrypt.genSalt(10);
+//         this.password = await bcrypt.hash(this.password, 10);
+//         next();
+//     }
+//     catch(err) {
+//         next(err);
+//     }
+// });
 
 UserProfileSchema.methods.generateAuthToken = async function () {
     try {

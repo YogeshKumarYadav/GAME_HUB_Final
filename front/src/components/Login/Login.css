@@ -1,0 +1,24 @@
+.maindiv {
+    padding-top: 30px;
+    height: 550px;
+    width: 500px;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #92a086;
+    border-radius: 15px;
+    box-shadow: 5px 5px 2px 1px #519872;
+}
+
+.register {
+    margin-top: 0;
+    margin-left: 50px;
+}
+
+.userfooter {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
