@@ -5,6 +5,7 @@ const router = express.Router();
 require('../DB/mongoose_connect');
 const UserProfile = require('../DB/profile_schema.js');
 const UserData = require('../DB/data_schema.js');
+const Authenticateuser = require('../middleware/authentication.js')
 
 router.get('/', (req, res) => {
     res.send('HOME PAGE');
@@ -26,6 +27,7 @@ router.post('/user/login', async (req, res) => {
             console.log(user);
             const checkpass = await bcrypt.compare(pass, user.password);
             token = await user.generateAuthToken();
+            console.log(token);
             res.cookie("jwtoken", token, {
                 expires: new Date(Date.now() + 25892000000),
                 httpOnly: true
@@ -87,6 +89,11 @@ router.post('/user/register', async (req, res) => {
     catch (err){
         console.log(err);
     }
+})
+
+
+router.get('/user/profile', Authenticateuser, (req, res) => {
+    res.send(req.rootuser);
 })
 
 module.exports = router

@@ -110,7 +110,7 @@ const Register = () => {
                         <input type="radio" name="gender" value="Female"
                             onChange={changeval}
                         />
-                        <label> GAY</label>
+                        <label> Other</label>
                         <input type="radio" name="gender" value="Other"
                             onChange={changeval}
                         />
