@@ -1,6 +1,8 @@
+const jwt = require('jsonwebtoken');
 const express = require('express');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
+
 
 require('../DB/mongoose_connect');
 const UserProfile = require('../DB/profile_schema.js');
@@ -9,34 +11,35 @@ const Authenticateuser = require('../middleware/authentication.js')
 
 router.get('/', (req, res) => {
     res.send('HOME PAGE');
-})
+});
 
 router.post('/user/login', async (req, res) => {
     const name = req.body.userid;
     const pass = req.body.password;
     try {
         let token;
-
         if(!name || !pass)
             return res.status(400).json({error: "All details are required"});
         
         const user = await UserProfile.findOne({userid: name});
-          
-
         if(user) {
-            console.log(user);
-            const checkpass = await bcrypt.compare(pass, user.password);
-            token = await user.generateAuthToken();
-            console.log(token);
-            res.cookie("jwtoken", token, {
-                expires: new Date(Date.now() + 25892000000),
-                httpOnly: true
-            });
+            // const checkpass = await bcrypt.compare(pass, user.password);
             
-            if(user.password === pass) {
+            console.log(user);
+            if(pass === user.password) {
+                console.log(user);
+                
+                token = await user.generateAuthToken();
+                console.log(token);
+
+                res.cookie("jwtoken", token, {
+                    expires: new Date(Date.now() + 1000000),
+                    httpOnly: true
+                });
                 res.status(200).json({message: "Login successfully"});
             }
             else {
+                console.log(user.userid + "  Wrong password");
                 res.status(401).json({error: "Wrong password"});
             } 
         }
@@ -47,9 +50,11 @@ router.post('/user/login', async (req, res) => {
     catch (err) {
         console.log(err);
     }
-})
+});
 
 router.post('/user/register', async (req, res) => {
+    let token;
+
     console.log("Register user fetched....");
     const name = req.body.name;
     const userid = req.body.userid;
@@ -57,6 +62,7 @@ router.post('/user/register', async (req, res) => {
     const email = req.body.email;
     const gen = req.body.gender;
     const age = req.body.age;
+    const avatar = req.body.avatar;
 
     if(!name || !userid || !pass || !email || !gen || !age)
         return res.status(422).json({error: "All details are required"});
@@ -72,7 +78,8 @@ router.post('/user/register', async (req, res) => {
             password: pass,
             email: email,
             gender: gen,
-            age: age
+            age: age,
+            avatar: avatar
         });
         await newuser.save()
 
@@ -83,17 +90,32 @@ router.post('/user/register', async (req, res) => {
             gamescore: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         })
         await newdata.save();
+
+        token = await newuser.generateAuthToken();
+        console.log(token);
+
+        res.cookie("jwtoken", token, {
+            expires: new Date(Date.now() + 25892000000),
+            httpOnly: true
+        });
+
         res.status(201).json({message: "User registered succesfully"});
 
     }
     catch (err){
         console.log(err);
     }
-})
+});
 
+router.get('/user/profile',Authenticateuser ,(req, res) => {
+    // console.log(`user token is  ${req.cookies.jwtoken}`);
+    //console.log({profile: req.rootuser, score: req.userscore});
+    res.send({profile: req.rootuser, score: req.userscore});
+});
 
-router.get('/user/profile', Authenticateuser, (req, res) => {
-    res.send(req.rootuser);
+router.get('/user/logout',(req, res) => {
+    res.clearCookie('jwtoken', {path: '/'})
+    res.status(200).send('user logout');
 })
 
 module.exports = router

@@ -2,11 +2,12 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom'; 
 import { useState } from 'react';
 import './Register.css';
+import Avatars from '../Avatar/Images.js';
 
 const Register = () => {
 
     const navigate = useNavigate();
-
+    const [ava, setava] = useState(0);
 
     const [user, setUser] = useState({
         name:"",
@@ -14,7 +15,8 @@ const Register = () => {
         password:"",
         email:"",
         gender:"",
-        age:""
+        age:"",
+        avatar:""
     });
 
     let name, value;
@@ -35,7 +37,8 @@ const Register = () => {
             password: user.password,
             email: user.email,
             gender: user.gender,
-            age: user.age
+            age: user.age,
+            avatar: ava
         }
 
         const data = await fetch('/user/register', {
@@ -61,7 +64,8 @@ const Register = () => {
                 password: user.password,
                 email: user.email,
                 gender: user.gender,
-                age: user.age
+                age: user.age,
+                avatar: user.avatar
             })
             navigate('/register');
         }   
@@ -74,64 +78,69 @@ const Register = () => {
 
     return (
         <>
-            <div className='maindiv'>
-                <h1 className='register'>Register</h1>
-                <div>
-                    <div>
-                        <input type='text' name='name' placeholder='Name' autoComplete='off' 
-                            value={user.name}
-                            onChange={changeval}
-                        />
-                    </div>
-                    <div>
-                        <input type='text' name='userid' placeholder='UserID' autoComplete='off'
-                            value={user.userid}
-                            onChange={changeval}
-                        />
-                    </div>
-                    <div>
-                        <input type='password' name='password' placeholder='Password' autoComplete='off'
-                            value={user.password}
-                            onChange={changeval}
-                        />
-                    </div>
-                    <div>
-                        <input type='email' name='email' placeholder='Email' autoComplete='off'
-                            value={user.email}
-                            onChange={changeval}
-                        />
-                    </div>
-                    <div>
-                        <label>Male</label>
-                        <input type='radio' name='gender' value="Male"
-                            onChange={changeval}
-                        />
-                        <label> Female</label>
-                        <input type="radio" name="gender" value="Female"
-                            onChange={changeval}
-                        />
-                        <label> Other</label>
-                        <input type="radio" name="gender" value="Other"
-                            onChange={changeval}
-                        />
-                    </div>
-                    <div>
+            <div className="registerbox row">
+                <div className='col-sm-6'>
+                    <h3>Register here</h3>
+                        <div className="inputBox"> 
+                            <input type='text' name='name' placeholder='Name' autoComplete='off' 
+                                value={user.name}
+                                onChange={changeval}
+                            />
+                            <input type='text' name='userid' placeholder='UserID' autoComplete='off'
+                                value={user.userid}
+                                onChange={changeval}
+                            />
+                            <input type='password' name='password' placeholder='Password' autoComplete='off'
+                                value={user.password}
+                                onChange={changeval}
+                            />
+                            <input type='email' name='email' placeholder='Email' autoComplete='off'
+                                value={user.email}
+                                onChange={changeval}
+                            />
+                            <div>
+                                <div className='radioinput'>
+                                    <label>Male</label>
+                                    <input type='radio' name='gender' value="Male"
+                                        onChange={changeval}
+                                    />
+                                </div>
+                                <div className='radioinput'>
+                                <label> Female</label>
+                                    <input type="radio" name="gender" value="Female"
+                                        onChange={changeval}
+                                    />
+                                </div>
+                                <div className='radioinput'>
+                                <label> Other</label>
+                                    <input type="radio" name="gender" value="Other"
+                                        onChange={changeval}
+                                    />
+                                </div>
+                            </div>
                         <input type='number' name='age' placeholder='Age' autoComplete='off'
-                            value={user.age}
-                            onChange={changeval}
-                        />
-                    </div>
-                    <div>
+                                value={user.age}
+                                onChange={changeval}
+                            />
+                        </div>
                         <input type='submit' 
-                            value='register'
-                            onClick={saveuser}
+                                value='Register'
+                                onClick={saveuser}
                         />
+                
+                    <div className="text-center">
+                    <strong><NavLink to="/login">Sign In</NavLink></strong>
                     </div>
                 </div>
-
-                <div className='userfooter'>
-                    <p>Already Registered </p>
-                    <strong><NavLink to="/login">Sign In</NavLink></strong>
+                <div className='avatardiv'>
+                        {
+                            Avatars.map((img, i) => (
+                                <img className='avat' 
+                                    style={{border: ava === i ? "4px solid darkviolet" : "0", borderRadius: '10px'}}
+                                    src={img} alt='pic' key={i} 
+                                    onClick={() => setava(i)}/>
+                            ))
+                        }                    
                 </div>
             </div>
         </>

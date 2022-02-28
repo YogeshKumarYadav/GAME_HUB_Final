@@ -64,34 +64,27 @@ const Login = () => {
     }
 
     return (
-        <>
-            <div className='maindiv'>
-                <h1 className='register'>Login</h1>
-                <div>
-                    <div>
-                        <input type='text' name='userid' placeholder='UserID' autoComplete='off'
-                            value={user.userid}
-                            onChange={handlechange}
-                        />
+        <>  
+                <div className='loginBox'>
+                    {/* <image className="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px"/> */}
+                    <h3>Login here</h3>
+
+                    <div className="inputBox"> 
+                        <input id="uname" type="text" name="userid" placeholder="UserID"
+                        value={user.userid}
+                        onChange={handlechange}/> 
+
+                        <input id="pass" type="password" name="password" placeholder="Password"
+                        value={user.password}
+                        onChange={handlechange}/> 
+                    </div> 
+                    <input type="submit" name=""
+                    value='Login'
+                    onClick={gotologin}/>
+                    <div className="text-center">
+                        <strong><NavLink to="/register">Sign Up</NavLink></strong>
                     </div>
-                    <div>
-                        <input type='password' name='password' placeholder='Password' autoComplete='off' 
-                            value={user.password}
-                            onChange={handlechange}
-                        />
-                    </div>
-                    <div>
-                        <input type='submit' 
-                            value='Login'
-                            onClick={gotologin}
-                        />
-                    </div>
-                </div>
-                <div className='userfooter'>
-                    <p>New User </p>
-                    <strong><NavLink to="/register">Sign Up</NavLink></strong>
-                </div>
-            </div>
+                </div>        
         </>
     )
 }

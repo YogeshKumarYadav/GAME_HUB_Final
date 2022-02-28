@@ -1,6 +1,6 @@
 const  mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const UserProfileSchema = new mongoose.Schema({
     name: {
@@ -13,7 +13,7 @@ const UserProfileSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        require: true
+        require: true,
     },
     gender: {
         type: String,
@@ -24,6 +24,10 @@ const UserProfileSchema = new mongoose.Schema({
         require: true
     },
     age: {
+        type: Number,
+        require: true
+    },
+    avatar: {
         type: Number,
         require: true
     },
@@ -39,8 +43,8 @@ const UserProfileSchema = new mongoose.Schema({
 
 // UserProfileSchema.pre('save', async function (next) {
 //     try {
-//         // const salt = await bcrypt.genSalt(10);
-//         this.password = await bcrypt.hash(this.password, 10);
+//         const salt = await bcrypt.genSalt(10);
+//         this.password = await bcrypt.hash(this.password, salt);
 //         next();
 //     }
 //     catch(err) {
