@@ -23,7 +23,7 @@ body {
 
 .registerbox {
     position: absolute;
-    top: 50%;
+    top: 57%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 700px;
@@ -36,7 +36,7 @@ body {
 
 .avatardiv {
     overflow: auto;
-    height: 500px;
+    height: 433px;
     width: 310px;
 }
 
@@ -71,7 +71,7 @@ h3 {
     border: none;
     border-bottom: 2px solid #262626;
     outline: none;
-    height: 40px;
+    height: 25px;
     color: #fff;
     background: transparent;
     font-size: 16px;

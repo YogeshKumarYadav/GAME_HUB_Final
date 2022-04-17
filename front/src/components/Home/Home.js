@@ -1,6 +1,9 @@
 import React from 'react';
 import './Home.css';
-//import game1 from '../Games/2048-master/index';
+
+import Games from '../GameIcons/games.js'
+
+import { NavLink } from 'react-router-dom';
 
 const Home = () => {  
     return (
@@ -9,21 +12,29 @@ const Home = () => {
             <div>
                 <ul class="main-nav">
                 <li class="item1">
-                    <div class="bg">
-                        {/* <a href="">game1</a> */}
-                    </div>
+                    <a href='https://api.razzlepuzzles.com/2048'>
+                        <img className='gameIcons' src={Games[0]} alt='pic'/>
+                    </a>
                 </li>
                 <li class="item2">
-                    <div class="bg"></div>
+                    <a href='https://api.razzlepuzzles.com/colorcrush'>
+                        <img className='gameIcons' src={Games[1]} alt='pic'/>
+                    </a>
                 </li>
                 <li class="item3">
-                    <div class="bg"></div>
+                    <a href='https://api.razzlepuzzles.com/wordsearch'>
+                        <img className='gameIcons' src={Games[2]} alt='pic'/>
+                    </a>
                 </li>
                 <li class="item4">
-                    <div class="bg"></div>
+                    <a href='https://api.razzlepuzzles.com/swipeout'>
+                        <img className='gameIcons' src={Games[3]} alt='pic'/>
+                    </a>
                 </li>
                 <li class="item5">
-                    <div class="bg"></div>
+                    <a href='https://api.razzlepuzzles.com/dot_connect'>
+                        <img className='gameIcons' src={Games[4]} alt='pic'/>
+                    </a>
                 </li>
                 </ul>
             </div>
