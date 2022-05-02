@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './Login.css';
+import { UserContext } from '../../App';
 
 const Login = () => {
-
+    const {state, dispatch} = useContext(UserContext);
     const navigate = useNavigate();
 
     const [user, setuser] = useState({
@@ -38,6 +39,7 @@ const Login = () => {
 
         console.log(data);
         if(data.status === 200) {
+            dispatch({type:"USER", payload:true});
             console.log("Success");
             navigate('/');
         }

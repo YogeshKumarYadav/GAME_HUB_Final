@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { UserContext } from '../../App';
 
 const Logout = () => {
-    
+    const {state, dispatch} = useContext(UserContext);
     const navigate = useNavigate();
     useEffect(() => {
         fetch('/user/logout', {
@@ -15,6 +15,7 @@ const Logout = () => {
             },
             credentials: "include"
         }).then((res) => {
+            dispatch({type:"USER", payload:false});
             if(res.status === 200)
                 navigate('/login');
             else {
