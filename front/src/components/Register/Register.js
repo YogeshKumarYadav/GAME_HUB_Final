@@ -1,11 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { NavLink, useNavigate } from 'react-router-dom'; 
 import { useState } from 'react';
 import './Register.css';
 import Avatars from '../Avatar/Images.js';
+import { UserContext } from '../../App';
 
 const Register = () => {
-
+    const {state, dispatch} = useContext(UserContext);
     const navigate = useNavigate();
     const [ava, setava] = useState(0);
 
@@ -52,6 +53,7 @@ const Register = () => {
         // const data = await res.json();
         console.log(data);
         if(data.status === 201) {
+            dispatch({type:"USER", payload:true});
             console.log("Success");
             navigate('/');
         }
