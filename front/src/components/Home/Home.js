@@ -45,13 +45,18 @@ const Home = () => {
         else {
             return(
                 <>
+                    <div className='NoUserDiv'/>
+                    <div className='NoUserContent'>
+                        <h1 className='Welcome'><strong>Welcome To</strong></h1>
+                        <div className="Homelogo">Game<strong>Hub</strong></div>
+                        <p className='Tagline'><strong>The Online Fun & Gaming Site.</strong></p>                               
+                    </div>
                 </>
            ) 
         }
     }
     return (
         <>
-            <p>No User</p>
             <HomeState/>
         </>
     )
