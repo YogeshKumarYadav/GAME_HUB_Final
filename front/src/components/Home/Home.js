@@ -1,11 +1,42 @@
-import React, {useContext} from 'react';
+import React, {useState, useEffect} from 'react';
 import './Home.css';
 import Games from '../GameIcons/games.js'
-import { NavLink } from 'react-router-dom';
-import { UserContext } from '../../App';
 
 const Home = () => {  
-    const {state, dispatch} = useContext(UserContext);
+    const [state, setstate] = useState([false]);
+
+    const hom = async () => {
+        try {
+            const res = await fetch('/user/profile', {
+                method: 'GET',
+                headers: {
+                    Accept: "appllication/json",
+                    "Content-Type": "application/json" 
+                },
+                credentials: "include"
+            });
+
+            const data = await res.json();
+            
+            // setprofile(data.profile);
+            // setscore(data.score);
+            setstate(true);
+            
+            
+            if(!res.status === 200) {
+                throw new Error(res.error);
+            }
+
+        } catch (err) {
+            console.log(err);
+            setstate(false);
+        }
+    }
+
+    useEffect(() => {
+        hom();
+    });
+
     const HomeState = () => {
         if(state) {
            return(
@@ -55,6 +86,10 @@ const Home = () => {
            ) 
         }
     }
+
+    // useEffect(() => {
+    //     window.localStorage.setItem({state, dispatch});
+    // })
     return (
         <>
             <HomeState/>

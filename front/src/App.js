@@ -8,7 +8,7 @@ import About from './components/About/About.js';
 import Logout from './components/Logout/Logout.js';
 import { Route, Routes } from 'react-router-dom';
 import { createContext, useContext, useReducer } from 'react';
-import { initialState, reducer } from './reducer/UseReducer';
+import { initialState, reducer } from './reducer/UseReducer.js';
 
 export const UserContext = createContext();
 
