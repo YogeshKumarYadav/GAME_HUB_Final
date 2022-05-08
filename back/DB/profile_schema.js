@@ -43,8 +43,8 @@ const UserProfileSchema = new mongoose.Schema({
 
 // UserProfileSchema.pre('save', async function (next) {
 //     try {
-//         const salt = await bcrypt.genSalt(10);
-//         this.password = await bcrypt.hash(this.password, salt);
+//         const p = this.password;
+//         this.password = await bcrypt.hash(this.password, 10);
 //         next();
 //     }
 //     catch(err) {

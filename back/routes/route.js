@@ -9,11 +9,11 @@ const UserProfile = require('../DB/profile_schema.js');
 const UserData = require('../DB/data_schema.js');
 const Authenticateuser = require('../middleware/authentication.js')
 
-router.get('/', (req, res) => {
+router.get('/', function(req, res) {
     res.send('HOME PAGE');
 });
 
-router.post('/user/login', async (req, res) => {
+router.post('/user/login', async function(req, res) {
     const name = req.body.userid;
     const pass = req.body.password;
     try {
@@ -23,12 +23,10 @@ router.post('/user/login', async (req, res) => {
         
         const user = await UserProfile.findOne({userid: name});
         if(user) {
+            // console.log(await bcrypt.compare(pass, user.password));
             // const checkpass = await bcrypt.compare(pass, user.password);
-            
-            console.log(user);
-            if(pass === user.password) {
-                console.log(user);
-                
+            // console.log(checkpass, user.password);
+            if(pass == user.password) {
                 token = await user.generateAuthToken();
                 console.log(token);
 
@@ -40,7 +38,7 @@ router.post('/user/login', async (req, res) => {
             }
             else {
                 console.log(user.userid + "  Wrong password");
-                res.status(401).json({error: "Wrong password"});
+                res.status(401).json({error: " Wrong password"});
             } 
         }
         else{
@@ -52,7 +50,7 @@ router.post('/user/login', async (req, res) => {
     }
 });
 
-router.post('/user/register', async (req, res) => {
+router.post('/user/register', async function(req, res) {
     let token;
 
     console.log("Register user fetched....");
@@ -107,13 +105,11 @@ router.post('/user/register', async (req, res) => {
     }
 });
 
-router.get('/user/profile',Authenticateuser ,(req, res) => {
-    // console.log(`user token is  ${req.cookies.jwtoken}`);
-    //console.log({profile: req.rootuser, score: req.userscore});
+router.get('/user/profile',Authenticateuser, function(req, res) {
     res.send({profile: req.rootuser, score: req.userscore});
 });
 
-router.get('/user/logout',(req, res) => {
+router.get('/user/logout', function(req, res) {
     res.clearCookie('jwtoken', {path: '/'})
     res.status(200).send('user logout');
 })

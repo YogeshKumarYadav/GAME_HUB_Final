@@ -1,0 +1,54 @@
+.aboutDiv {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.71);
+    border-radius: 25px;
+    margin-left: 27%;
+    margin-right: 27%;
+    padding: 40px 40px;
+    height: 480px;
+    width: 650px;
+    margin-top: 40px;
+}
+
+.aboutHomelogo strong{
+    margin: 2px;
+    padding: 3px;
+    font-size: 65x;
+    color: #000000;
+    font-weight: 700;
+    background-color:#519872;
+    border-radius: 13px;
+}
+
+.aboutHomelogo{
+  font-size: 65px;
+  color: #FFF9F9;
+  font-weight: 600;
+}
+
+.aboutTagline {
+    color: #FFF9F9;
+    margin-top: 20px;
+    font-size: 30px;
+    background-color: #519872;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.DevsIntro {
+    margin-bottom: 20px;
+    color: #F5F5F5;
+    font-size: 20px;
+}
+
+.Devs{
+    margin: 0px 0px 0px 0px;
+    color: #F5F5F5;
+    font-size: 20px;
+}
+
+.ContactUs{
+    margin-top: 45px;
+    color: #F5F5F5;
+    font-size: 15px;
+}
