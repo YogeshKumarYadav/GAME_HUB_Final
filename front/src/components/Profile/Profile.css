@@ -1,13 +1,14 @@
-/* body {
-    background-color: #f9f9fa
-} */
-
 .padding {
     padding: 3rem !important
 }
 
 .user-card-full {
     overflow: hidden
+}
+
+.profilediv {
+    margin-left: 22%;
+    margin-right: 22%;
 }
 
 .card {
