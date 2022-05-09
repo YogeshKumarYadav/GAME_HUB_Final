@@ -14,6 +14,10 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.json());
 app.use('/', apis);
 
-app.listen(process.env.PORT, (req, res) =>{
+if(process.env.NODE_ENV === "production") {
+    app.use(express.static("front/build"))
+}
+
+app.listen(process.env.PORT || 5000, (req, res) =>{
     console.log(`Server is running at port ${process.env.PORT}`);
 })
